@@ -1,4 +1,4 @@
-package com.yedebkid.moviesapp
+package com.yedebkid.moviesapp.model
 
 
 import com.google.gson.annotations.SerializedName
