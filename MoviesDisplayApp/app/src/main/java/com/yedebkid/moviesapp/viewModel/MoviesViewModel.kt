@@ -7,10 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.yedebkid.moviesapp.model.domain.MoviesResultDomainData
 import com.yedebkid.moviesapp.rest.MoviesRepo
 import com.yedebkid.moviesapp.util.UIState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MoviesViewModel(
+@HiltViewModel
+class MoviesViewModel @Inject constructor(
     private val moviesRepo: MoviesRepo,
     private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {

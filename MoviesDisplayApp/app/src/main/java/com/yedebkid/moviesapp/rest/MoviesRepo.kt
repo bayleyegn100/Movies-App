@@ -8,6 +8,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.lang.Exception
+import javax.inject.Inject
 
 interface MoviesRepo {
     fun getAllPopularMovies(): Flow<UIState>
@@ -15,7 +16,7 @@ interface MoviesRepo {
 //    fun getAllPopularMovies()
 }
 
-class MoviesRepoImplementation(
+class MoviesRepoImplementation @Inject constructor(
     private val moviesApi: MoviesApi
 ): MoviesRepo {
     override fun getAllPopularMovies(): Flow<UIState> = flow {
