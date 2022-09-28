@@ -34,7 +34,7 @@ android {
     }
 
     buildFeatures {
-//        viewBinding true
+        viewBinding true
     }
 }
 
@@ -85,4 +85,8 @@ dependencies {
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
 
     // mockk
-    testImplementation "io.mockk:mockk:1.12.3"}
+    testImplementation "io.mockk:mockk:1.12.3"
+    // picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+}

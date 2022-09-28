@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movies_navigation"
+    app:startDestination="@id/nowPlayingFragment">
+
+    <fragment
+        android:id="@+id/popularFragment"
+        android:name="com.yedebkid.moviesapp.PopularFragment"
+        android:label="fragment_popular"
+        tools:layout="@layout/fragment_popular" >
+        <action
+            android:id="@+id/action_popularFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nowPlayingFragment"
+        android:name="com.yedebkid.moviesapp.NowPlayingFragment"
+        android:label="fragment_now_playing"
+        tools:layout="@layout/fragment_now_playing" >
+        <action
+            android:id="@+id/action_nowPlayingFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/incomingFragment"
+        android:name="com.yedebkid.moviesapp.IncomingFragment"
+        android:label="fragment_incoming"
+        tools:layout="@layout/fragment_incoming" >
+        <action
+            android:id="@+id/action_incomingFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.yedebkid.moviesapp.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <action
+            android:id="@+id/action_detailsFragment_to_popularFragment"
+            app:destination="@id/popularFragment" />
+        <action
+            android:id="@+id/action_detailsFragment_to_incomingFragment"
+            app:destination="@id/incomingFragment" />
+        <action
+            android:id="@+id/action_detailsFragment_to_nowPlayingFragment"
+            app:destination="@id/nowPlayingFragment" />
+    </fragment>
+</navigation>
