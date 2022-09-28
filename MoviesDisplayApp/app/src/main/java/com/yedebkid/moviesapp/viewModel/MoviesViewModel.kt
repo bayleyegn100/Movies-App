@@ -21,10 +21,18 @@ class MoviesViewModel @Inject constructor(
     private val _popularMovies: MutableLiveData<UIState> = MutableLiveData(UIState.LOADING)
     val popularMovies: LiveData<UIState> get() = _popularMovies
 
+    private val _upcomingMovies: MutableLiveData<UIState> = MutableLiveData(UIState.LOADING)
+    val upcomingMovies: LiveData<UIState> get() = _upcomingMovies
+
+    private val _nowPlayingMovies: MutableLiveData<UIState> = MutableLiveData(UIState.LOADING)
+    val nowPlayingMovies: LiveData<UIState> get() = _nowPlayingMovies
+
     var moviesResultDomainData: MoviesResultDomainData? = null
 
     init {
         getPopularMoviesOnly()
+        getNowPlayingMoviesOnly()
+        getUpcomingMoviesOnly()
     }
 
 
@@ -34,6 +42,28 @@ class MoviesViewModel @Inject constructor(
             moviesRepo.getAllPopularMovies().collect() {
                 //post the live data
                 _popularMovies.postValue(it)
+            }
+        }
+
+    }
+
+    private fun getNowPlayingMoviesOnly() {
+        viewModelScope.launch(ioDispatcher) {
+            //Making a network call
+            moviesRepo.getAllNowPlayingMovies().collect {
+                //post the live data
+                _nowPlayingMovies.postValue(it)
+            }
+        }
+
+    }
+
+    private fun getUpcomingMoviesOnly() {
+        viewModelScope.launch(ioDispatcher) {
+            //Making a network call
+            moviesRepo.getAllUpcomingMovies().collect() {
+                //post the live data
+                _upcomingMovies.postValue(it)
             }
         }
 

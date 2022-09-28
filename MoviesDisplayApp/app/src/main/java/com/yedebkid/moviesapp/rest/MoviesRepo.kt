@@ -12,8 +12,8 @@ import javax.inject.Inject
 
 interface MoviesRepo {
     fun getAllPopularMovies(): Flow<UIState>
-//    fun getAllNowPlayingMovies()
-//    fun getAllPopularMovies()
+    fun getAllNowPlayingMovies(): Flow<UIState>
+    fun getAllUpcomingMovies(): Flow<UIState>
 }
 
 class MoviesRepoImplementation @Inject constructor(
@@ -25,6 +25,42 @@ class MoviesRepoImplementation @Inject constructor(
 
         try {
             val response = moviesApi.getPopularMovies()
+            if(response.isSuccessful){
+                response.body()?.let{
+                    emit(UIState.SUCCESS(it.mapToMoviesResultDomainData()))
+                } ?: throw NullResponseException("Response is null.")
+            } else {
+                throw FailureResponseException(response.errorBody().toString())
+            }
+        } catch (e: Exception){
+            emit(UIState.ERROR(e))
+        }
+    }
+
+    override fun getAllNowPlayingMovies(): Flow<UIState> = flow {
+        emit(UIState.LOADING)
+        delay(2000)
+
+        try {
+            val response = moviesApi.getNowPlayingMovies()
+            if(response.isSuccessful){
+                response.body()?.let{
+                    emit(UIState.SUCCESS(it.mapToMoviesResultDomainData()))
+                } ?: throw NullResponseException("Response is null.")
+            } else {
+                throw FailureResponseException(response.errorBody().toString())
+            }
+        } catch (e: Exception){
+            emit(UIState.ERROR(e))
+        }
+    }
+
+    override fun getAllUpcomingMovies(): Flow<UIState> = flow {
+        emit(UIState.LOADING)
+        delay(2000)
+
+        try {
+            val response = moviesApi.getUpcomingMovies()
             if(response.isSuccessful){
                 response.body()?.let{
                     emit(UIState.SUCCESS(it.mapToMoviesResultDomainData()))
