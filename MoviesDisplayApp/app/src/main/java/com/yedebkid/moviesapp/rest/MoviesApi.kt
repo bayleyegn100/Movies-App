@@ -33,7 +33,7 @@ interface MoviesApi {
 
     companion object{
 
-        const val BASE_URL = "https://api.themoviedb.org/3/movie"
+        const val BASE_URL = "https://api.themoviedb.org/3/movie/"
         private const val POPULAR = "popular"
         private const val UPCOMING = "upcoming"
         private const val NOW_PLAYING = "now_playing"

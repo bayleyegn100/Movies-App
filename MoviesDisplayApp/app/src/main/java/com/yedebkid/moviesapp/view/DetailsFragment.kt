@@ -1,7 +1,6 @@
-package com.yedebkid.moviesapp
+package com.yedebkid.moviesapp.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,9 @@ import android.widget.Toast
 import com.yedebkid.moviesapp.databinding.FragmentDetailsBinding
 import com.yedebkid.moviesapp.model.domain.MoviesResultDomainData
 import com.yedebkid.moviesapp.util.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsFragment : BaseFragment() {
 
     private val binding by lazy {

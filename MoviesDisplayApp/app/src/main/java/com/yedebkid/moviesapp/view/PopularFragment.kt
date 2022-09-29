@@ -1,31 +1,37 @@
-package com.yedebkid.moviesapp
+package com.yedebkid.moviesapp.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.yedebkid.moviesapp.R
 import com.yedebkid.moviesapp.adapter.MoviesAdapter
-import com.yedebkid.moviesapp.databinding.FragmentIncomingBinding
+import com.yedebkid.moviesapp.databinding.FragmentPopularBinding
 import com.yedebkid.moviesapp.model.domain.MoviesResultDomainData
 import com.yedebkid.moviesapp.util.BaseFragment
 import com.yedebkid.moviesapp.util.DetailsClickHandler
 import com.yedebkid.moviesapp.util.UIState
+import dagger.hilt.android.AndroidEntryPoint
 
-class IncomingFragment : BaseFragment() {
-
+@AndroidEntryPoint
+class PopularFragment : BaseFragment() {
     private val binding by lazy {
-        FragmentIncomingBinding.inflate(layoutInflater)
+        FragmentPopularBinding.inflate(layoutInflater)
     }
 
+//    private val moviesViewModel by lazy {    // Use BaseFragement not to make code DRY
+//        ViewModelProvider(requireActivity())[MoviesViewModel::class.java]
+//    }
+
+//    Click listener
     private val moviesAdaptor by lazy {
-        MoviesAdapter {
-            when(it){
-                is DetailsClickHandler.UpcomingDetailsClick -> {
-                    moviesViewModel.moviesResultDomainData = it.upcomingMovies
-                    findNavController().navigate(R.id.action_incomingFragment_to_detailsFragment)
+        MoviesAdapter { handler ->
+            when(handler){
+                is DetailsClickHandler.PopularDetailsClick -> {
+                    moviesViewModel.moviesResultDomainData = handler.popularMovies
+                    findNavController().navigate(R.id.action_popularFragment_to_detailsFragment)
                 }
                 else -> {
 
@@ -41,28 +47,26 @@ class IncomingFragment : BaseFragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        binding.incomingFragmentRv.apply {
-            layoutManager = LinearLayoutManager(requireContext(),
-            LinearLayoutManager.VERTICAL, false
-            )
+        binding.popularFragment.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = moviesAdaptor
         }
 
-        moviesViewModel.upcomingMovies.observe(viewLifecycleOwner) {
-            when (it) {
+        moviesViewModel.popularMovies.observe(viewLifecycleOwner) { state ->        //popularMovies is the live data from movies viewmodel
+            when (state) {
                 is UIState.LOADING -> {
-                    binding.incomingFragmentRv.visibility = View.GONE
+                    binding.popularFragment.visibility = View.GONE
                     binding.loadingSpinner.visibility = View.VISIBLE
                 }
                 is UIState.SUCCESS<*> -> {
-                    binding.incomingFragmentRv.visibility = View.VISIBLE
+                    binding.popularFragment.visibility = View.VISIBLE
                     binding.loadingSpinner.visibility = View.GONE
 
-                    val newMovies = it.data as MoviesResultDomainData
+                    val newMovies = state.data as MoviesResultDomainData
                     moviesAdaptor.updateMovies(newMovies)
                 }
                 is UIState.ERROR -> {
-                    binding.incomingFragmentRv.visibility = View.GONE
+                    binding.popularFragment.visibility = View.GONE
                     binding.loadingSpinner.visibility = View.GONE
                 }
             }
