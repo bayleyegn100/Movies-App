@@ -4,8 +4,6 @@ package com.yedebkid.moviesapp.model
 import com.google.gson.annotations.SerializedName
 
 data class MoviesData(
-    @SerializedName("dates")
-    val dates: Dates?,
     @SerializedName("page")
     val page: Int?,
     @SerializedName("results")

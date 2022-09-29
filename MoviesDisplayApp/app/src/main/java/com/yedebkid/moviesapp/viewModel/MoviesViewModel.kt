@@ -18,6 +18,9 @@ class MoviesViewModel @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
+
+    var moviesResultDomainData: MoviesResultDomainData? = null
+
     private val _popularMovies: MutableLiveData<UIState> = MutableLiveData(UIState.LOADING)
     val popularMovies: LiveData<UIState> get() = _popularMovies
 
@@ -27,7 +30,6 @@ class MoviesViewModel @Inject constructor(
     private val _nowPlayingMovies: MutableLiveData<UIState> = MutableLiveData(UIState.LOADING)
     val nowPlayingMovies: LiveData<UIState> get() = _nowPlayingMovies
 
-    var moviesResultDomainData: MoviesResultDomainData? = null
 
     init {
         getPopularMoviesOnly()
