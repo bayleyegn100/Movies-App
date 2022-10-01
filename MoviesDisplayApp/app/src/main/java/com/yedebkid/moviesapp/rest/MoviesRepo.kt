@@ -27,7 +27,7 @@ class MoviesRepoImplementation @Inject constructor(
             val response = moviesApi.getPopularMovies()
             if(response.isSuccessful){
                 response.body()?.let{
-                    emit(UIState.SUCCESS(it.mapToMoviesResultDomainData()))
+                    emit(UIState.SUCCESS(it.results.mapToMoviesResultDomainData()))
                 } ?: throw NullResponseException("Response is null.")
             } else {
                 throw FailureResponseException(response.errorBody().toString())
@@ -45,7 +45,7 @@ class MoviesRepoImplementation @Inject constructor(
             val response = moviesApi.getNowPlayingMovies()
             if(response.isSuccessful){
                 response.body()?.let{
-                    emit(UIState.SUCCESS(it.mapToMoviesResultDomainData()))
+                    emit(UIState.SUCCESS(it.results.mapToMoviesResultDomainData()))
                 } ?: throw NullResponseException("Response is null.")
             } else {
                 throw FailureResponseException(response.errorBody().toString())
@@ -63,7 +63,7 @@ class MoviesRepoImplementation @Inject constructor(
             val response = moviesApi.getUpcomingMovies()
             if(response.isSuccessful){
                 response.body()?.let{
-                    emit(UIState.SUCCESS(it.mapToMoviesResultDomainData()))
+                    emit(UIState.SUCCESS(it.results.mapToMoviesResultDomainData()))
                 } ?: throw NullResponseException("Response is null.")
             } else {
                 throw FailureResponseException(response.errorBody().toString())

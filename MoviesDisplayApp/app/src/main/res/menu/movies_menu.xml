@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/Popular"
+        android:icon="@drawable/popular_icon"
+        android:id="@+id/popularFragment"/>
+    <item android:title="@string/Upcoming"
+        android:icon="@drawable/upcoming_icon"
+        android:id="@+id/upcomingFragment"/>
+    <item android:title="@string/Now_playing"
+        android:icon="@drawable/nowplaying_icon"
+        android:id="@+id/nowPlayingFragment"/>
+</menu>

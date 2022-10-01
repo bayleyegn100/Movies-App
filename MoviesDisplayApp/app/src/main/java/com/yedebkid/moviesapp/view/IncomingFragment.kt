@@ -60,7 +60,7 @@ class IncomingFragment : BaseFragment() {
                     binding.incomingFragmentRv.visibility = View.VISIBLE
                     binding.loadingSpinner.visibility = View.GONE
 
-                    val newMovies = it.data as MoviesResultDomainData
+                    val newMovies = it.data as List<MoviesResultDomainData>
                     moviesAdaptor.updateMovies(newMovies)
                 }
                 is UIState.ERROR -> {

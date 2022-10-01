@@ -5,7 +5,7 @@ import com.yedebkid.moviesapp.model.Result
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
-@Parcelize
+
 data class MoviesResultDomainData(
     val title: String,
     val posterImg: String,
@@ -13,7 +13,7 @@ data class MoviesResultDomainData(
     val popularity: Double,
     val overview: String,
 
-): Parcelable
+)
 
 fun List<Result?>?.mapToMoviesResultDomainData(): List<MoviesResultDomainData>? =
     this?.map{

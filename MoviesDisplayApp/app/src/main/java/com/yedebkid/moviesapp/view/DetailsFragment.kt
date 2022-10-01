@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.squareup.picasso.Picasso
+import com.yedebkid.moviesapp.R
 import com.yedebkid.moviesapp.databinding.FragmentDetailsBinding
 import com.yedebkid.moviesapp.model.domain.MoviesResultDomainData
 import com.yedebkid.moviesapp.util.BaseFragment
@@ -33,7 +35,15 @@ class DetailsFragment : BaseFragment() {
             binding.title.text = it.title
             binding.releasedDate.text = it.date
             binding.popularity.text = it.popularity.toString()
-            binding.MoviePoster.text= it.posterImg
+
+            Picasso.get()
+                .load(it.posterImg)
+                .placeholder(R.drawable.ic_baseline_image_search_24)
+                .error(R.drawable.ic_baseline_broken_image_24)
+                .into(binding.posterImg)
+
+
+
         } ?: Toast.makeText(requireContext(), "Movie Details not Found.", Toast.LENGTH_LONG).show()
     }
 }

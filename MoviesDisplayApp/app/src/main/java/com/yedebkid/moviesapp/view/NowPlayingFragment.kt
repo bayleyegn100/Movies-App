@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.yedebkid.moviesapp.R
 import com.yedebkid.moviesapp.adapter.MoviesAdapter
 import com.yedebkid.moviesapp.databinding.FragmentNowPlayingBinding
+import com.yedebkid.moviesapp.model.domain.MoviesResultDomainData
 import com.yedebkid.moviesapp.util.BaseFragment
 import com.yedebkid.moviesapp.util.DetailsClickHandler
 import com.yedebkid.moviesapp.util.UIState
@@ -57,6 +58,10 @@ class NowPlayingFragment : BaseFragment() {
                 is UIState.SUCCESS<*> -> {
                     binding.nowPlayingFragmentRv.visibility = View.VISIBLE
                     binding.loadingSpinner.visibility = View.GONE
+
+                    val newMovies = state.data as List<MoviesResultDomainData>
+                    moviesAdaptor.updateMovies(newMovies)
+
                 }
                 is UIState.ERROR -> {
                     binding.nowPlayingFragmentRv.visibility = View.GONE

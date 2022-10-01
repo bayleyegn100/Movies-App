@@ -1,5 +1,6 @@
 package com.yedebkid.moviesapp.rest
 
+import com.yedebkid.moviesapp.model.MoviesData
 import com.yedebkid.moviesapp.model.Result
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,7 +14,7 @@ interface MoviesApi {
         @Query("language") language: String = LANGUAGE,
         @Query("page") page: Int = PAGE
 
-    ): Response<List<Result?>?>
+    ): Response<MoviesData?>
 
     @GET(UPCOMING)
     suspend fun getUpcomingMovies(
@@ -21,7 +22,7 @@ interface MoviesApi {
         @Query("language") language: String = LANGUAGE,
         @Query("page") page: Int = PAGE
 
-    ): Response<List<Result?>?>
+    ): Response<MoviesData?>
 
     @GET(NOW_PLAYING)
     suspend fun getNowPlayingMovies(
@@ -29,7 +30,7 @@ interface MoviesApi {
         @Query("language") language: String = LANGUAGE,
         @Query("page") page: Int = PAGE
 
-    ): Response<List<Result?>?>
+    ): Response<MoviesData?>
 
     companion object{
 

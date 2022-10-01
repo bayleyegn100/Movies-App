@@ -14,9 +14,9 @@ class MoviesAdapter(
     private val detailsClickHandler: (DetailsClickHandler) -> Unit
    ) : RecyclerView.Adapter<MoviesViewHolder>() {
 
-    fun updateMovies(newMovies: MoviesResultDomainData){
+    fun updateMovies(newMovies: List    <MoviesResultDomainData>){
         dataSet.clear()
-        dataSet.add(newMovies)
+        dataSet.addAll(newMovies)
         notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder =
@@ -34,7 +34,6 @@ class MoviesAdapter(
     override fun getItemCount(): Int = dataSet.size
 }
 
-
 class MoviesViewHolder(
     private val binding: MoviesItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
@@ -43,15 +42,16 @@ class MoviesViewHolder(
        binding.date.text = movies.date
        binding.popularity.text = movies.popularity.toString()
 
-        binding.detailsbtn.setOnClickListener{
-            onClickHandler(DetailsClickHandler.PopularDetailsClick(movies))
-        }
-
+        val baseImgUrl = "https://image.tmdb.org/t/p/w440_and_h660_face/"
         Picasso.get()
-            .load(movies.posterImg)
+            .load(baseImgUrl + movies.posterImg)
             .placeholder(R.drawable.ic_baseline_image_search_24)
             .error(R.drawable.ic_baseline_broken_image_24)
             .into(binding.posterImg)
+
+        binding.detailsbtn.setOnClickListener{
+            onClickHandler(DetailsClickHandler.PopularDetailsClick(movies))
+        }
 
     }
 

@@ -1,6 +1,7 @@
 package com.yedebkid.moviesapp.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,15 +18,11 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PopularFragment : BaseFragment() {
+
     private val binding by lazy {
         FragmentPopularBinding.inflate(layoutInflater)
     }
 
-//    private val moviesViewModel by lazy {    // Use BaseFragement not to make code DRY
-//        ViewModelProvider(requireActivity())[MoviesViewModel::class.java]
-//    }
-
-//    Click listener
     private val moviesAdaptor by lazy {
         MoviesAdapter { handler ->
             when(handler){
@@ -37,7 +34,6 @@ class PopularFragment : BaseFragment() {
 
                 }
             }
-
         }
     }
 
@@ -62,8 +58,10 @@ class PopularFragment : BaseFragment() {
                     binding.popularFragment.visibility = View.VISIBLE
                     binding.loadingSpinner.visibility = View.GONE
 
-                    val newMovies = state.data as MoviesResultDomainData
+                    val newMovies = state.data as List<MoviesResultDomainData>
                     moviesAdaptor.updateMovies(newMovies)
+
+                    Log.d("TAG", "onCreateView:$newMovies")
                 }
                 is UIState.ERROR -> {
                     binding.popularFragment.visibility = View.GONE
