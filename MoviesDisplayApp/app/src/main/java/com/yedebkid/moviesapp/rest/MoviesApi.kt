@@ -1,7 +1,6 @@
 package com.yedebkid.moviesapp.rest
 
 import com.yedebkid.moviesapp.model.MoviesData
-import com.yedebkid.moviesapp.model.Result
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -35,6 +34,8 @@ interface MoviesApi {
     companion object{
 
         const val BASE_URL = "https://api.themoviedb.org/3/movie/"
+        const val POSTER_PATH = "https://image.tmdb.org/t/p/w440_and_h660_face/"
+
         private const val POPULAR = "popular"
         private const val UPCOMING = "upcoming"
         private const val NOW_PLAYING = "now_playing"
@@ -42,10 +43,6 @@ interface MoviesApi {
         private const val LANGUAGE = "en-US"
         private const val PAGE = 1
     }
-
-
-
-
 
 
 

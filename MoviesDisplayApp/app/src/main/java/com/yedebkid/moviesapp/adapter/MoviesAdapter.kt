@@ -7,6 +7,7 @@ import com.squareup.picasso.Picasso
 import com.yedebkid.moviesapp.R
 import com.yedebkid.moviesapp.databinding.MoviesItemBinding
 import com.yedebkid.moviesapp.model.domain.MoviesResultDomainData
+import com.yedebkid.moviesapp.rest.MoviesApi
 import com.yedebkid.moviesapp.util.DetailsClickHandler
 
 class MoviesAdapter(
@@ -14,7 +15,7 @@ class MoviesAdapter(
     private val detailsClickHandler: (DetailsClickHandler) -> Unit
    ) : RecyclerView.Adapter<MoviesViewHolder>() {
 
-    fun updateMovies(newMovies: List    <MoviesResultDomainData>){
+    fun updateMovies(newMovies: List<MoviesResultDomainData>){
         dataSet.clear()
         dataSet.addAll(newMovies)
         notifyDataSetChanged()
@@ -42,9 +43,9 @@ class MoviesViewHolder(
        binding.date.text = movies.date
        binding.popularity.text = movies.popularity.toString()
 
-        val baseImgUrl = "https://image.tmdb.org/t/p/w440_and_h660_face/"
+//        val baseImgUrl = "https://image.tmdb.org/t/p/w440_and_h660_face/"
         Picasso.get()
-            .load(baseImgUrl + movies.posterImg)
+            .load(MoviesApi.POSTER_PATH + movies.posterImg)
             .placeholder(R.drawable.ic_baseline_image_search_24)
             .error(R.drawable.ic_baseline_broken_image_24)
             .into(binding.posterImg)

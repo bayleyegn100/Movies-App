@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yedebkid.moviesapp.R
 import com.yedebkid.moviesapp.adapter.MoviesAdapter
+import com.yedebkid.moviesapp.databinding.FragmentDetailsBinding
 import com.yedebkid.moviesapp.databinding.FragmentPopularBinding
 import com.yedebkid.moviesapp.model.domain.MoviesResultDomainData
 import com.yedebkid.moviesapp.util.BaseFragment
@@ -61,7 +62,7 @@ class PopularFragment : BaseFragment() {
                     val newMovies = state.data as List<MoviesResultDomainData>
                     moviesAdaptor.updateMovies(newMovies)
 
-                    Log.d("TAG", "onCreateView:$newMovies")
+//                    Log.d("TAG", "onCreateView:$newMovies")
                 }
                 is UIState.ERROR -> {
                     binding.popularFragment.visibility = View.GONE

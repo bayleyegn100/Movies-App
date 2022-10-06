@@ -23,7 +23,5 @@ fun List<Result?>?.mapToMoviesResultDomainData(): List<MoviesResultDomainData>? 
             date = it?.releaseDate ?: "",
             popularity = it?.popularity ?: 0.0,
             overview = it?.overview ?: ""
-
-
         )
     }
